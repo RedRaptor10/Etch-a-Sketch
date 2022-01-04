@@ -1,7 +1,9 @@
 function game() {
-	const colorTypes = document.querySelectorAll('.colorType');
-	const clearButton = document.querySelector('#clear');
+	const colorTypes = document.querySelectorAll('.color-type');
+	const clearGridBtn = document.getElementById('clear-grid-btn');
+	const newGridBtn = document.getElementById('new-grid-btn');
 	const container = document.querySelector('#container');
+	let numSquares = 16;
 	const maxSquares = 100;
 
 	// Get default Color Type
@@ -19,10 +21,33 @@ function game() {
 		});
 	});
 
-	createGrid(16); // Create Grid
+	createGrid(numSquares); // Create Grid
 	colorSquares(colorType); // Color Squares
 
-	clearButton.addEventListener('click', clearGrid);
+	clearGridBtn.addEventListener('click', clearGrid);
+	newGridBtn.addEventListener('click', newGrid);
+
+	function clearGrid() {
+		container.innerHTML = ''; // Clear Grid
+		createGrid(numSquares); // Recreate Grid
+		colorSquares(colorType); // Color Squares
+	}
+
+	function newGrid() {
+		numSquares = prompt('Enter grid size. (Default: 16)');
+	
+		// Prompt for grid size while input is less than or equal to 1,
+		// greater than 100 or is not a number
+		while (numSquares <= 0 || numSquares > maxSquares || isNaN(numSquares)) {
+			numSquares = prompt('Enter grid size.');
+	
+			if (numSquares <= 0 || numSquares > maxSquares || isNaN(numSquares)) {
+				alert('Invalid input. Grid size must be a number between 1 and ' + maxSquares + '.');
+			}
+		}
+	
+		clearGrid();
+	}
 }
 
 function createGrid(gridSize) {
@@ -42,21 +67,21 @@ function createGrid(gridSize) {
 			const square = document.createElement('div');
 			square.setAttribute('class', 'square');
 			square.style.display = 'inline-block';
-			square.style.background = 'rgb(211,211,211)';
+			square.style.background = 'rgb(255, 255, 255)';
 			square.style.width = squareWidth - squareBorderSize + 'px';
 			square.style.height = squareHeight - squareBorderSize + 'px';
-			square.style.borderTop = '1px solid rgb(128,128,128)';
-			square.style.borderLeft = '1px solid rgb(128,128,128)';
+			square.style.borderTop = '1px solid rgb(128, 128, 128)';
+			square.style.borderLeft = '1px solid rgb(128, 128, 128)';
 
 			// If square in last column, set border right
 			if (j === gridSize - 1) {
 				square.style.width = squareWidth - (squareBorderSize * 2) + 'px';
-				square.style.borderRight = '1px solid rgb(128,128,128)';
+				square.style.borderRight = '1px solid rgb(128, 128, 128)';
 			}
 			// If square in last row, set border bottom
 			if (i === gridSize - 1) {
 				square.style.height = squareHeight - (squareBorderSize * 2) + 'px';
-				square.style.borderBottom = '1px solid rgb(128,128,128)';
+				square.style.borderBottom = '1px solid rgb(128, 128, 128)';
 			}
 
 			// Add Square to Container
@@ -72,7 +97,7 @@ function colorSquares(colorType) {
 	if (colorType === 'Black') {
 			squares.forEach((square) => {
 				square.onmouseover = () => {
-					square.style.background = 'rgb(0,0,0)';
+					square.style.background = 'rgb(0, 0, 0)';
 				};
 		});
 	}
@@ -88,7 +113,7 @@ function colorSquares(colorType) {
 				let rgb2 = Math.floor(Math.random() * (maxNum - minNum + 1) + minNum);
 				let rgb3 = Math.floor(Math.random() * (maxNum - minNum + 1) + minNum);
 
-				square.style.background = 'rgb(' + rgb1 + ',' + rgb2 + ',' + rgb3 + ')';
+				square.style.background = 'rgb(' + rgb1 + ', ' + rgb2 + ', ' + rgb3 + ')';
 			};
 		});
 	}
@@ -117,24 +142,6 @@ function colorSquares(colorType) {
 			};
 		});
 	}
-}
-
-function clearGrid() {
-	let numSquares = 0;
-
-	// Prompt for grid size while input is less than or equal to 1,
-	// greater than 100 or is not a number
-	while (numSquares <= 0 || numSquares > 100 || isNaN(numSquares)) {
-		numSquares = prompt('Enter grid size.');
-
-		if (numSquares <= 0 || numSquares > 100 || isNaN(numSquares)) {
-			alert('Invalid input. Grid size must be a number between 1 and 100.');
-		}
-	}
-
-	container.innerHTML = ''; // Clear Grid
-	createGrid(numSquares); // Recreate Grid
-	colorSquares(colorType); // Color Squares
 }
 
 game();

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<link type="text/css" rel="stylesheet" href="style.css">
+</head>
+<body>
+	<h1 id="title">Etch-a-Sketch</h1>
+	<div id="description">
+		Hover over the grid to change tile colors. Choose between different color types below.
+	</div>
+	<br>
+
+	<div id="color-type-container">
+		<input type="radio" checked="true" class="color-type" name="colorType" value="Black">Black</input>
+		<input type="radio" class="color-type" name="colorType" value="Rainbow">Rainbow</input>
+		<input type="radio" class="color-type" name="colorType" value="Grayscale">Grayscale</input>
+	</div>
+	<br>
+
+	<div id="buttons-container">
+		<button id="clear-grid-btn" class="btn">Clear Grid</button>
+		<button id="new-grid-btn" class="btn">New Grid</button>
+	</div>
+	<br>
+	<div id="container"></div>
+
+	<script type="text/javascript" src="etch-a-sketch.js"></script>
+</body>
+</html>

@@ -2,7 +2,7 @@
 
 An Etch-a-Sketch app created through [TheOdinProject](https://www.theodinproject.com) online course.
 
-[Live Demo](https://redraptor10.github.io/Calculator)
+[Live Demo](https://redraptor10.github.io/Etch-a-Sketch)
 
 # Features
 
